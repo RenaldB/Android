@@ -1,8 +1,7 @@
-package com.cesi.topqizz;
+package com.cesi.topqizz.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.cesi.topqizz.R;
 import com.cesi.topqizz.model.User;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //instanciation de user
+        mUser = new User();
 
         //éléments graphique référencé
         mGreetingText = (TextView) findViewById(R.id.activity_main_greeting_txt);
@@ -65,4 +68,5 @@ public class MainActivity extends AppCompatActivity {
 
         });
     }
+
 }
