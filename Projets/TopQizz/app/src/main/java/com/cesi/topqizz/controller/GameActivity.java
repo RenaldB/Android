@@ -19,7 +19,7 @@ import com.cesi.topqizz.model.QuestionBank;
 import java.util.Arrays;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
-    private static final String BUNDLE_EXTRA_SCORE = "BUNDLE_EXTRA_SCORE" ;
+    public static final String BUNDLE_EXTRA_SCORE = "BUNDLE_EXTRA_SCORE" ;
     private static final String BUNDLE_STATE_SCORE = "BUNDLE_STATE_SCORE";
     private static final String BUNDLE_STATE_QUESTION = "BUNDLE_STATE_QUESTION";
     private TextView mTextQuestion;
@@ -96,21 +96,21 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                         "pierre",
                         "Paul",
                         "Jack"),
-                1);
+                0);
 
         Question question5 = new Question("Romain a pour nom de famille ",
                 Arrays.asList("Gauthier",
                         "Gautier",
                         "Gothier",
                         "Gothique"),
-                1);
+                0);
 
         Question question6 = new Question("On fait un cours de ",
                 Arrays.asList("PHP",
                         "CSS",
                         "Android",
                         "C"),
-                3);
+                2);
 
         return new QuestionBank(Arrays.asList(question1,
                 question2,
@@ -138,6 +138,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
 
         //Si la réponse de l'utilisateur est égale a la bonne réponse on affiche Correct !
         if (responseIndex == mCurrentQuestion.getAnswerIndex()) {
+            //On incrémente
+            mScore++;
             // Good answer
             Toast.makeText(this, "Bonne réponse !", Toast.LENGTH_SHORT).show();
         }
@@ -159,8 +161,8 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     private void endGame() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        builder.setTitle("Well done!")
-                .setMessage("Ton score : " + mScore)
+        builder.setTitle("Super !")
+                .setMessage("Ton score est : " + mScore)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -169,6 +171,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                         intent.putExtra(BUNDLE_EXTRA_SCORE, mScore);
                         setResult(RESULT_OK, intent);
                         finish();
+
                     }
                 })
                 .setCancelable(false)
