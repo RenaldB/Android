@@ -70,47 +70,53 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private QuestionBank generateQuestions(){
-        Question question1 = new Question("Who is the creator of Android?",
+        Question question1 = new Question("Qui est le créateur d'Android?",
                 Arrays.asList("Andy Rubin",
                         "Steve Wozniak",
                         "Jake Wharton",
                         "Paul Smith"),
-                0);
+                0,
+                ", j'avoue que je ne savais pas (>_<)'");
 
         Question question2 = new Question("When did the first man land on the moon?",
                 Arrays.asList("1958",
                         "1962",
                         "1967",
                         "1969"),
-                3);
+                3,
+                ", j'étais pas encore né !");
 
         Question question3 = new Question("What is the house number of The Simpsons?",
                 Arrays.asList("42",
                         "101",
                         "666",
                         "742"),
-                3);
+                3,
+                ", Il faut mieux regarder la série !");
 
         Question question4 = new Question("Qui a codé l'application",
-                Arrays.asList("Rénald",
+                Arrays.asList("Jack",
                         "pierre",
                         "Paul",
-                        "Jack"),
-                0);
+                        "Rénald"),
+                3,
+                ", car c'est le meilleur développeur !");
 
-        Question question5 = new Question("Romain a pour nom de famille ",
-                Arrays.asList("Gauthier",
-                        "Gautier",
-                        "Gothier",
-                        "Gothique"),
-                0);
+        Question question5 = new Question("A la fin Rénald aura quel note ?",
+                Arrays.asList("A",
+                        "B",
+                        "C",
+                        "D"),
+                0,
+                ", car il a bien travaillé et le prof est sympa !");
 
         Question question6 = new Question("On fait un cours de ",
                 Arrays.asList("PHP",
                         "CSS",
                         "Android",
                         "C"),
-                2);
+                2,
+                ", car on est en cours d'android Bip Boup");
 
         return new QuestionBank(Arrays.asList(question1,
                 question2,
@@ -141,12 +147,15 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             //On incrémente
             mScore++;
             // Good answer
-            Toast.makeText(this, "Bonne réponse !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Bonne réponse ! C'est bien " + mCurrentQuestion.getChoiceList().get(mCurrentQuestion.getAnswerIndex()), Toast.LENGTH_SHORT).show();
         }
         //sinon on affiche Wrong !
         else {
             // Wrong answer
-            Toast.makeText(this, "Mauvaise réponse !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Mauvaise réponse ! " +
+                    "La bonne réponse était "
+                    +  mCurrentQuestion.getChoiceList().get(mCurrentQuestion.getAnswerIndex())
+                    + mCurrentQuestion.getAnswerExplain(), Toast.LENGTH_LONG).show();
         }
 
         if (--mNumberOfQuestions == 0) {
